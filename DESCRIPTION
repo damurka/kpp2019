@@ -1,0 +1,25 @@
+Package: kpp2019
+Title: Kenya Population Projections 2019
+Version: 1.0.0.9000
+Authors@R: 
+    person("David", "Kariuki", , "hello@damurka.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0009-0003-6159-1107"))
+Description: Provides data from the Kenya National Bureau of Statistics Projections 2019.
+License: CC BY 4.0
+URL: https://kpp2019.damurka.com, 
+    https://github.com/damurka/kpp2019
+BugReports: https://github.com/damurka/kpp2019/issues
+Suggests: 
+    knitr,
+    rmarkdown,
+    spelling,
+    testthat (>= 3.0.0)
+Depends: 
+    R (>= 2.10)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-GB
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+LazyData: true
