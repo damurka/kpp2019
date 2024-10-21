@@ -106,8 +106,8 @@ attribution should be given when using the data.
 
 ## Contributing
 
-If you’d like to contribute to the development of googlesheets4, please
-read [these guidelines](https://kpp2019.damurka.com/CONTRIBUTING.html).
+If you’d like to contribute to the development of kpp2019, please read
+[these guidelines](https://kpp2019.damurka.com/CONTRIBUTING.html).
 
 Please note that the kpp2019 project is released with a [Contributor
 Code of Conduct](https://kpp2019.damurka.com/CODE_OF_CONDUCT.html). By
