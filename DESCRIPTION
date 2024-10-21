@@ -6,7 +6,7 @@ Authors@R:
            comment = c(ORCID = "0009-0003-6159-1107"))
 Description: Provides data from the Kenya National Bureau of Statistics Projections 2019.
 License: CC BY 4.0 + file LICENSE
-URL: https://kpp2019.damurka.com, https://github.com/damurka/kpp2019, https://damurka.github.io/kpp2019/
+URL: https://kpp2019.damurka.com, https://github.com/damurka/kpp2019, https://damurka.github.io/kpp2019/, http://kpp2019.damurka.com/
 BugReports: https://github.com/damurka/kpp2019/issues
 Suggests:
     dplyr,

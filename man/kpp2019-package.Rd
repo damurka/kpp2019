@@ -16,6 +16,7 @@ Useful links:
   \item \url{https://kpp2019.damurka.com}
   \item \url{https://github.com/damurka/kpp2019}
   \item \url{https://damurka.github.io/kpp2019/}
+  \item \url{http://kpp2019.damurka.com/}
   \item Report bugs at \url{https://github.com/damurka/kpp2019/issues}
 }
 
