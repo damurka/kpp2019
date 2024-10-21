@@ -1,0 +1,104 @@
+---
+title: "How Population Projections Are Done"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction to Population Projections
+
+Population projections are vital tools used to estimate future population sizes and compositions. These estimates help governments and organizations plan for infrastructure, healthcare, education, and other public services. The projections are based on current demographic trends such as birth rates, death rates, and migration patterns.
+
+This guide explains how population projections are done using the methods applied by the **Kenya National Bureau of Statistics (KNBS)**, with an emphasis on cohort-component methods. 
+
+# Key Inputs for Population Projections
+
+Population projections require several key demographic inputs:
+
+- **Base Population**: The population data from the most recent census, which serves as the starting point.
+- **Fertility Rates**: The number of births per woman within a certain age group.
+- **Mortality Rates**: The death rates by age and sex.
+- **Migration**: The movement of people in and out of the country (although Kenya’s projections often assume zero net migration).
+
+# Population Projection Formula
+
+The most common approach to projecting populations is the **cohort-component method**, which projects the population forward by age and sex cohorts. The formula for each cohort is as follows:
+
+\[
+P_{t+n} = P_t + B_t - D_t + M_t
+\]
+
+Where:
+
+  - \(P_{t+n}\) is the projected population at time \(t+n\).
+  - \(P_t\) is the current population at time \(t\).
+  - \(B_t\) is the number of births during the period.
+  - \(D_t\) is the number of deaths during the period.
+  - \(M_t\) is the net migration during the period (for Kenya, this is often assumed to be zero).
+
+### Births (B)
+\[
+B_t = \sum_{x} f_x P_{x,t}
+\]
+Where \(f_x\) is the fertility rate for women in age group \(x\), and \(P_{x,t}\) is the population of women in age group \(x\) at time \(t\).
+
+### Deaths (D)
+\[
+D_t = \sum_{x} m_x P_{x,t}
+\]
+Where \(m_x\) is the mortality rate for age group \(x\), and \(P_{x,t}\) is the population in age group \(x\) at time \(t\).
+
+### Migration (M)
+\[
+M_t = I_t - E_t
+\]
+Where \(I_t\) is the number of immigrants and \(E_t\) is the number of emigrants during the period.
+
+# Example: Kenya's Population Projections 2020-2045
+
+Using the cohort-component method, the **KNBS** has projected the following changes in Kenya's population from 2020 to 2045:
+
+- The total population is expected to grow from **48.8 million in 2020** to **70.2 million in 2045**.
+- The youth population (aged 15-24) is projected to grow from **10.4 million** in 2020 to **12.3 million** by 2045.
+- The number of older adults (aged 60 and above) is expected to increase dramatically from **2.7 million** to **6.4 million** by 2045.
+
+The chart below shows the projected total population in 5-year intervals:
+
+```{r, fig.alt="Kenya Population Projections (2020-2045)", warning=FALSE, message=FALSE, echo=FALSE}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(kpp2019)
+
+data('pop5')
+
+pop5 %>% 
+    filter(county == 'Kenya', gender == 'Total') %>% 
+    summarise(
+      `All Ages` = sum(ifelse(age == 'All Ages', pop, 0)),
+      `15-24` = sum(ifelse(age %in% c('15-19', '20-24'), pop, 0)),
+      `60+` = sum(ifelse(age %in% c('60-64', '65-69', '70-74', '75-79','80+'), pop, 0)),
+      .by = year
+    ) %>% 
+    pivot_longer(
+      cols = -year,
+      names_to = 'Age Groups'
+    ) %>% 
+    mutate(
+      value = value/1000000
+    ) %>% 
+    ggplot(aes(year, value, colour = `Age Groups`)) +
+      geom_line() +
+      labs(title = 'Kenya Population Projections (2020-2045)',
+           y = 'Population (Million)',
+           x = 'Year') +
+      theme_light()
+```
+
+# Conclusion
+
+Population projections are essential for strategic planning and resource allocation. By projecting population growth and changes in demographics, governments and organizations can better prepare for the future. The methodology employed by **KNBS**, based on demographic data and the cohort-component method, provides a robust framework for making informed predictions about Kenya’s population in the coming decades.

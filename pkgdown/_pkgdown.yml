@@ -18,3 +18,8 @@ authors:
   David Kariuki:
     href: https://damurka.com
 
+articles:
+  - title: "Population Projection"
+    navbar: ~
+    contents:
+      - articles/population-projection
