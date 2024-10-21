@@ -24,7 +24,8 @@ A data frame with 1,920 rows and 4 variables:
 }
 }
 \source{
-Kenya National Bureau of Statistics (2023). \emph{2019 Kenya Population and Housing Census Analytical Report on Population Projections}. Retrieved from \href{https://www.knbs.or.ke/wp-content/uploads/2023/09/2019-Kenya-population-and-Housing-Census-Analytical-Report-on-Population-Projections.pdf}{knbs.or.ke}.
+Kenya National Bureau of Statistics (2023). \emph{2019 Kenya Population and Housing Census Analytical Report on Population Projections}.
+Retrieved from \href{https://www.knbs.or.ke/wp-content/uploads/2023/09/2019-Kenya-population-and-Housing-Census-Analytical-Report-on-Population-Projections.pdf}{knbs.or.ke}.
 }
 \usage{
 components
@@ -52,18 +53,18 @@ data(components)
 head(components)
 summary(components)
 
-# Example: Plot the number of births over the projection periods
+# Example: Plot the number of births over the projection periods for Kenya
 library(ggplot2)
 library(dplyr)
 births <- components \%>\%
-  filter(component == "Births")
-ggplot(births, aes(x = year, y = value)) +
+  filter(component == "Births", county == 'Kenya')
+ggplot(births, aes(x = factor(year, ordered = TRUE), y = value, group = county)) +
   geom_line() +
   geom_point() +
   labs(
     title = "Projected Births in Kenya (2020-2045)",
     x = "Projection Period",
-    y = "Number of Births (Thousands)"
+    y = "Number of Births"
   ) +
   theme_minimal()
 }

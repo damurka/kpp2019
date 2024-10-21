@@ -15,7 +15,8 @@ A data frame with 41,424 rows and 5 variables:
 }
 }
 \source{
-Kenya National Bureau of Statistics (2023). \emph{2019 Kenya Population and Housing Census Analytical Report on Population Projections}. Retrieved from \href{https://www.knbs.or.ke/wp-content/uploads/2023/09/2019-Kenya-population-and-Housing-Census-Analytical-Report-on-Population-Projections.pdf}{knbs.or.ke}.
+Kenya National Bureau of Statistics (2023). \emph{2019 Kenya Population and Housing Census Analytical Report on Population Projections}.
+Retrieved from \href{https://www.knbs.or.ke/wp-content/uploads/2023/09/2019-Kenya-population-and-Housing-Census-Analytical-Report-on-Population-Projections.pdf}{knbs.or.ke}.
 }
 \usage{
 pop1
