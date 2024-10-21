@@ -3,7 +3,7 @@
 on:
   push:
     branches: [main, master]
-   schedule:
+  schedule:
     # * is a special character in YAML so we have to quote this string
     # 3am Pacific = 11am UTC
     # https://crontab.guru is your friend
