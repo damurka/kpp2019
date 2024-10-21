@@ -14,6 +14,7 @@ Suggests:
     knitr,
     rmarkdown,
     spelling,
+    tidyr,
     testthat (>= 3.0.0)
 Depends: 
     R (>= 2.10)
