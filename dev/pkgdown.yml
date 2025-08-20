@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   articles/population-projection: population-projection.html
-last_built: 2025-08-19T11:13Z
+last_built: 2025-08-20T11:21Z
 urls:
   reference: http://kpp2019.damurka.com/reference
   article: http://kpp2019.damurka.com/articles
