@@ -30,6 +30,7 @@ You can install the development version of kpp2019 from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("damurka/kpp2019")
 ```
@@ -40,6 +41,7 @@ After installation, you can load the datasets and start exploring
 Kenya’s population projections.
 
 ``` r
+
 # Load the package
 library(kpp2019)
 

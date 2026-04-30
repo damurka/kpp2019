@@ -30,33 +30,42 @@ The most common approach to projecting populations is the
 **cohort-component method**, which projects the population forward by
 age and sex cohorts. The formula for each cohort is as follows:
 
-$$P_{t + n} = P_{t} + B_{t} - D_{t} + M_{t}$$
+``` math
+P_{t+n} = P_t + B_t - D_t + M_t
+```
 
 Where:
 
-- $P_{t + n}$ is the projected population at time $t + n$.
-- $P_{t}$ is the current population at time $t$.
-- $B_{t}$ is the number of births during the period.
-- $D_{t}$ is the number of deaths during the period.
-- $M_{t}$ is the net migration during the period (for Kenya, this is
+- $`P_{t+n}`$ is the projected population at time $`t+n`$.
+- $`P_t`$ is the current population at time $`t`$.
+- $`B_t`$ is the number of births during the period.
+- $`D_t`$ is the number of deaths during the period.
+- $`M_t`$ is the net migration during the period (for Kenya, this is
   often assumed to be zero).
 
 #### Births (B)
 
-$$B_{t} = \sum\limits_{x}f_{x}P_{x,t}$$ Where $f_{x}$ is the fertility
-rate for women in age group $x$, and $P_{x,t}$ is the population of
-women in age group $x$ at time $t$.
+``` math
+B_t = \sum_{x} f_x P_{x,t}
+```
+Where $`f_x`$ is the fertility rate for women in age group $`x`$, and
+$`P_{x,t}`$ is the population of women in age group $`x`$ at time $`t`$.
 
 #### Deaths (D)
 
-$$D_{t} = \sum\limits_{x}m_{x}P_{x,t}$$ Where $m_{x}$ is the mortality
-rate for age group $x$, and $P_{x,t}$ is the population in age group $x$
-at time $t$.
+``` math
+D_t = \sum_{x} m_x P_{x,t}
+```
+Where $`m_x`$ is the mortality rate for age group $`x`$, and $`P_{x,t}`$
+is the population in age group $`x`$ at time $`t`$.
 
 #### Migration (M)
 
-$$M_{t} = I_{t} - E_{t}$$ Where $I_{t}$ is the number of immigrants and
-$E_{t}$ is the number of emigrants during the period.
+``` math
+M_t = I_t - E_t
+```
+Where $`I_t`$ is the number of immigrants and $`E_t`$ is the number of
+emigrants during the period.
 
 ## Example: Kenya’s Population Projections 2020-2045
 
