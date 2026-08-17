@@ -36,12 +36,16 @@ This dataset provides components of population change in Kenya over several 5-ye
 \details{
 This dataset captures various components of population change for Kenya from 2020 to 2045. It allows users to analyze demographic changes over time, including the impacts of births, deaths, migration, and natural increase on population size. The rates, such as the crude birth rate (CBR) and crude death rate (CDR), provide insights into demographic trends per 1,000 population.
 
+\code{value} is kept at the full decimal precision published by KNBS (these
+are cohort-component projections, not rounded figures); round it
+yourself if whole-number figures are needed.
+
 \strong{Components Explained}:
 \itemize{
-\item \strong{Births}: Total births during the projection period (in thousands).
-\item \strong{Deaths}: Total deaths during the projection period (in thousands).
-\item \strong{Natural Increase (Nat. Inc.)}: Difference between births and deaths (in thousands).
-\item \strong{Net Migration (Net Mig.)}: Net migration (immigrants minus emigrants) during the projection period (in thousands).
+\item \strong{Births}: Total births during the projection period.
+\item \strong{Deaths}: Total deaths during the projection period.
+\item \strong{Natural Increase (Nat. Inc.)}: Difference between births and deaths.
+\item \strong{Net Migration (Net Mig.)}: Net migration (immigrants minus emigrants) during the projection period.
 \item \strong{Crude Birth Rate (CBR)}: Births per 1,000 people per year.
 \item \strong{Crude Death Rate (CDR)}: Deaths per 1,000 people per year.
 \item \strong{Crude Natural Increase Rate (CNIR)}: Natural increase per 1,000 people per year (CBR minus CDR).
@@ -54,18 +58,21 @@ head(components)
 summary(components)
 
 # Example: Plot the number of births over the projection periods for Kenya
-library(ggplot2)
-library(dplyr)
-births <- components \%>\%
-  filter(component == "Births", county == 'Kenya')
-ggplot(births, aes(x = factor(year, ordered = TRUE), y = value, group = county)) +
-  geom_line() +
-  geom_point() +
-  labs(
-    title = "Projected Births in Kenya (2020-2045)",
-    x = "Projection Period",
-    y = "Number of Births"
-  ) +
-  theme_minimal()
+if (requireNamespace("ggplot2", quietly = TRUE) &&
+    requireNamespace("dplyr", quietly = TRUE)) {
+  library(ggplot2)
+  library(dplyr)
+  births <- components \%>\%
+    filter(component == "Births", county == 'Kenya')
+  ggplot(births, aes(x = factor(year, ordered = TRUE), y = value, group = county)) +
+    geom_line() +
+    geom_point() +
+    labs(
+      title = "Projected Births in Kenya (2020-2045)",
+      x = "Projection Period",
+      y = "Number of Births"
+    ) +
+    theme_minimal()
+}
 }
 \keyword{datasets}

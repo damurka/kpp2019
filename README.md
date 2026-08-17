@@ -38,6 +38,13 @@ in the “Data Sources” section below.
 
 ## Installation
 
+You can install the released version of kpp2019 from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("kpp2019")
+```
+
 You can install the development version of kpp2019 from
 [GitHub](https://github.com/) with:
 
