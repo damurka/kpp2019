@@ -8,21 +8,24 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides data from the Kenya National Bureau of Statistics Projections 2019.
+Provides population projection data for Kenya and its 47 counties from 2020 to 2045, derived from the 2019 Kenya Population and Housing Census and subsequent projections published by the Kenya National Bureau of Statistics (KNBS). Includes annual and five-year age and sex distributions, along with components of population change such as births, deaths, and migration.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://kpp2019.damurka.com}
   \item \url{https://github.com/damurka/kpp2019}
-  \item \url{https://damurka.github.io/kpp2019/}
-  \item \url{http://kpp2019.damurka.com/}
   \item Report bugs at \url{https://github.com/damurka/kpp2019/issues}
 }
 
 }
 \author{
 \strong{Maintainer}: David Kariuki \email{hello@damurka.com} (\href{https://orcid.org/0009-0003-6159-1107}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item David Kariuki \email{hello@damurka.com} (\href{https://orcid.org/0009-0003-6159-1107}{ORCID}) [copyright holder]
+}
 
 }
 \keyword{internal}
