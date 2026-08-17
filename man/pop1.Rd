@@ -5,13 +5,13 @@
 \alias{pop1}
 \title{Base and Projected Age Distributions in Kenya (2020-2035, Annual Increments)}
 \format{
-A data frame with 41,424 rows and 5 variables:
+A data frame with 41,472 rows and 5 variables:
 \describe{
 \item{county}{Name of the county in Kenya}
 \item{age}{Age group in 5-year intervals (e.g., "0-4", "5-9", ..., "80+")}
 \item{year}{Year of the population estimate}
 \item{gender}{Gender category ("Male", "Female", or "Total")}
-\item{pop}{Estimated population count for the specified county, age group, gender, and year}
+\item{pop}{Estimated population for the specified county, age group, gender, and year}
 }
 }
 \source{
@@ -34,6 +34,10 @@ take into account factors such as fertility rates, mortality rates, and migratio
 patterns. The age groups are provided in 5-year intervals, and the population
 estimates are updated annually from 2020 to 2035.
 
+\code{pop} is kept at the full decimal precision published by KNBS (these are
+cohort-component projections, not rounded head counts); round it yourself
+if whole-person figures are needed.
+
 \strong{Note:}
 \itemize{
 \item The "Total" gender category represents the combined population of both males and females.
@@ -46,17 +50,20 @@ head(pop1)
 summary(pop1)
 
 # Example: Plotting the population distribution for Nairobi County in 2020
-library(ggplot2)
-library(dplyr)
-kenya_2020 <- pop1 \%>\%
-  filter(county == "Nairobi City", year == 2020, gender == "Total", age != 'All Ages')
-ggplot(kenya_2020, aes(x = age, y = pop)) +
-  geom_bar(stat = "identity") +
-  labs(
-    title = "Population Distribution in Nairobi County (2020)",
-    x = "Age Group",
-    y = "Population"
-  ) +
-  theme_minimal()
+if (requireNamespace("ggplot2", quietly = TRUE) &&
+    requireNamespace("dplyr", quietly = TRUE)) {
+  library(ggplot2)
+  library(dplyr)
+  kenya_2020 <- pop1 \%>\%
+    filter(county == "Nairobi City", year == 2020, gender == "Total", age != 'All Ages')
+  ggplot(kenya_2020, aes(x = age, y = pop)) +
+    geom_bar(stat = "identity") +
+    labs(
+      title = "Population Distribution in Nairobi County (2020)",
+      x = "Age Group",
+      y = "Population"
+    ) +
+    theme_minimal()
+}
 }
 \keyword{datasets}

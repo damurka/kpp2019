@@ -11,7 +11,7 @@
 #'   \item{age}{Age group in 5-year intervals (e.g., "0-4", "5-9", ..., "80+")}
 #'   \item{year}{Year of the population estimate}
 #'   \item{gender}{Gender category ("Male", "Female", or "Total")}
-#'   \item{pop}{Estimated population count for the specified county, age group, gender, and year}
+#'   \item{pop}{Estimated population for the specified county, age group, gender, and year}
 #' }
 #'
 #' @details
@@ -20,6 +20,10 @@
 #' take into account factors such as fertility rates, mortality rates, and migration
 #' patterns. The age groups are provided in 5-year intervals, and the population
 #' estimates are available in five-year increments from 2020 to 2045.
+#'
+#' `pop` is kept at the full decimal precision published by KNBS (these are
+#' cohort-component projections, not rounded head counts); round it yourself
+#' if whole-person figures are needed.
 #'
 #' **Note:**
 #' - The "Total" gender category represents the combined population of both males and females.
@@ -34,16 +38,19 @@
 #' summary(pop5)
 #'
 #' # Example: Plotting the population distribution for Mombasa County in 2025
-#' library(ggplot2)
-#' library(dplyr)
-#' mombasa_2025 <- pop5 %>%
-#'   filter(county == "Mombasa", year == 2025, gender == "Total", age != 'All Ages')
-#' ggplot(mombasa_2025, aes(x = age, y = pop)) +
-#'   geom_bar(stat = "identity") +
-#'   labs(
-#'     title = "Population Distribution in Mombasa County (2025)",
-#'     x = "Age Group",
-#'     y = "Population"
-#'   ) +
-#'   theme_minimal()
+#' if (requireNamespace("ggplot2", quietly = TRUE) &&
+#'     requireNamespace("dplyr", quietly = TRUE)) {
+#'   library(ggplot2)
+#'   library(dplyr)
+#'   mombasa_2025 <- pop5 %>%
+#'     filter(county == "Mombasa", year == 2025, gender == "Total", age != 'All Ages')
+#'   ggplot(mombasa_2025, aes(x = age, y = pop)) +
+#'     geom_bar(stat = "identity") +
+#'     labs(
+#'       title = "Population Distribution in Mombasa County (2025)",
+#'       x = "Age Group",
+#'       y = "Population"
+#'     ) +
+#'     theme_minimal()
+#' }
 "pop5"
