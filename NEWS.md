@@ -1,4 +1,4 @@
-# kpp2019 (development version)
+# kpp2019 0.0.1
 
 * Initial CRAN submission.
 * Provides `pop1`, `pop5`, and `components`: Kenya population projections
