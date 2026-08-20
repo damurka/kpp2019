@@ -1,6 +1,6 @@
 Package: kpp2019
 Title: Kenya Population Projections 2019
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("David", "Kariuki", , "hello@damurka.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0003-6159-1107"))
