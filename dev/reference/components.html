@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">kpp2019</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.0.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,10 +100,13 @@ Retrieved from <a href="https://www.knbs.or.ke/wp-content/uploads/2023/09/2019-K
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This dataset captures various components of population change for Kenya from 2020 to 2045. It allows users to analyze demographic changes over time, including the impacts of births, deaths, migration, and natural increase on population size. The rates, such as the crude birth rate (CBR) and crude death rate (CDR), provide insights into demographic trends per 1,000 population.</p>
-<p><strong>Components Explained</strong>:</p><ul><li><p><strong>Births</strong>: Total births during the projection period (in thousands).</p></li>
-<li><p><strong>Deaths</strong>: Total deaths during the projection period (in thousands).</p></li>
-<li><p><strong>Natural Increase (Nat. Inc.)</strong>: Difference between births and deaths (in thousands).</p></li>
-<li><p><strong>Net Migration (Net Mig.)</strong>: Net migration (immigrants minus emigrants) during the projection period (in thousands).</p></li>
+<p><code>value</code> is kept at the full decimal precision published by KNBS (these
+are cohort-component projections, not rounded figures); round it
+yourself if whole-number figures are needed.</p>
+<p><strong>Components Explained</strong>:</p><ul><li><p><strong>Births</strong>: Total births during the projection period.</p></li>
+<li><p><strong>Deaths</strong>: Total deaths during the projection period.</p></li>
+<li><p><strong>Natural Increase (Nat. Inc.)</strong>: Difference between births and deaths.</p></li>
+<li><p><strong>Net Migration (Net Mig.)</strong>: Net migration (immigrants minus emigrants) during the projection period.</p></li>
 <li><p><strong>Crude Birth Rate (CBR)</strong>: Births per 1,000 people per year.</p></li>
 <li><p><strong>Crude Death Rate (CDR)</strong>: Deaths per 1,000 people per year.</p></li>
 <li><p><strong>Crude Natural Increase Rate (CNIR)</strong>: Natural increase per 1,000 people per year (CBR minus CDR).</p></li>
@@ -115,27 +118,41 @@ Retrieved from <a href="https://www.knbs.or.ke/wp-content/uploads/2023/09/2019-K
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">components</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">components</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   county component year      value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Kenya  Births    2020-25 6<span style="text-decoration: underline;">404</span>408</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Kenya  Births    2026-30 6<span style="text-decoration: underline;">460</span>085</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Kenya  Births    2031-35 6<span style="text-decoration: underline;">475</span>904</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Kenya  Births    2036-40 6<span style="text-decoration: underline;">461</span>490</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Kenya  Births    2041-45 6<span style="text-decoration: underline;">418</span>919</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Kenya  Deaths    2020-25 1<span style="text-decoration: underline;">890</span>966</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   county component year       value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Kenya  Births    2020-25 6<span style="text-decoration: underline;">404</span>408.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Kenya  Births    2026-30 6<span style="text-decoration: underline;">460</span>085.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Kenya  Births    2031-35 6<span style="text-decoration: underline;">475</span>904.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Kenya  Births    2036-40 6<span style="text-decoration: underline;">461</span>490.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Kenya  Births    2041-45 6<span style="text-decoration: underline;">418</span>919.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Kenya  Deaths    2020-25 1<span style="text-decoration: underline;">890</span>966.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">components</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              county       component        year         value          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Baringo        :  40   Births :240   2020-25:384   Min.   : -29286.0  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Baringo        :  40   Births :240   2020-25:384   Min.   : -29286.3  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Bomet          :  40   CBR    :240   2026-30:384   1st Qu.:      6.4  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Bungoma        :  40   CDR    :240   2031-35:384   Median :     21.4  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Busia          :  40   CNIR   :240   2036-40:384   Mean   :  67132.2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Elgeyo-Marakwet:  40   CNMR   :240   2041-45:384   3rd Qu.:  50576.5  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Embu           :  40   Deaths :240                 Max.   :6475904.0  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Elgeyo-Marakwet:  40   CNMR   :240   2041-45:384   3rd Qu.:  50576.3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Embu           :  40   Deaths :240                 Max.   :6475903.7  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (Other)        :1680   (Other):480                                    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example: Plot the number of births over the projection periods for Kenya</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"dplyr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">births</span> <span class="op">&lt;-</span> <span class="va">components</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">component</span> <span class="op">==</span> <span class="st">"Births"</span>, <span class="va">county</span> <span class="op">==</span> <span class="st">'Kenya'</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">births</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">year</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">county</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      title <span class="op">=</span> <span class="st">"Projected Births in Kenya (2020-2045)"</span>,</span></span>
+<span class="r-in"><span>      x <span class="op">=</span> <span class="st">"Projection Period"</span>,</span></span>
+<span class="r-in"><span>      y <span class="op">=</span> <span class="st">"Number of Births"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘dplyr’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:stats’:</span>
@@ -144,17 +161,6 @@ Retrieved from <a href="https://www.knbs.or.ke/wp-content/uploads/2023/09/2019-K
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
-<span class="r-in"><span><span class="va">births</span> <span class="op">&lt;-</span> <span class="va">components</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">component</span> <span class="op">==</span> <span class="st">"Births"</span>, <span class="va">county</span> <span class="op">==</span> <span class="st">'Kenya'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">births</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">year</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">county</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"Projected Births in Kenya (2020-2045)"</span>,</span></span>
-<span class="r-in"><span>    x <span class="op">=</span> <span class="st">"Projection Period"</span>,</span></span>
-<span class="r-in"><span>    y <span class="op">=</span> <span class="st">"Number of Births"</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="components-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

@@ -14,7 +14,7 @@ pop1
 
 ## Format
 
-A data frame with 41,424 rows and 5 variables:
+A data frame with 41,472 rows and 5 variables:
 
 - county:
 
@@ -34,8 +34,8 @@ A data frame with 41,424 rows and 5 variables:
 
 - pop:
 
-  Estimated population count for the specified county, age group,
-  gender, and year
+  Estimated population for the specified county, age group, gender, and
+  year
 
 ## Source
 
@@ -53,6 +53,10 @@ fertility rates, mortality rates, and migration patterns. The age groups
 are provided in 5-year intervals, and the population estimates are
 updated annually from 2020 to 2035.
 
+`pop` is kept at the full decimal precision published by KNBS (these are
+cohort-component projections, not rounded head counts); round it
+yourself if whole-person figures are needed.
+
 **Note:**
 
 - The "Total" gender category represents the combined population of both
@@ -67,43 +71,46 @@ updated annually from 2020 to 2035.
 data(pop1)
 head(pop1)
 #> # A tibble: 6 × 5
-#>   county age    year gender     pop
-#>   <fct>  <fct> <int> <fct>    <dbl>
-#> 1 Kenya  0-4    2020 Male   3123737
-#> 2 Kenya  0-4    2020 Female 3156282
-#> 3 Kenya  0-4    2020 Total  6280019
-#> 4 Kenya  0-4    2021 Male   3143314
-#> 5 Kenya  0-4    2021 Female 3147353
-#> 6 Kenya  0-4    2021 Total  6290667
+#>   county age    year gender      pop
+#>   <fct>  <fct> <int> <fct>     <dbl>
+#> 1 Kenya  0-4    2020 Male   3123737 
+#> 2 Kenya  0-4    2020 Female 3156282 
+#> 3 Kenya  0-4    2020 Total  6280019 
+#> 4 Kenya  0-4    2021 Male   3143314.
+#> 5 Kenya  0-4    2021 Female 3147353.
+#> 6 Kenya  0-4    2021 Total  6290667.
 summary(pop1)
 #>              county           age             year         gender     
-#>  Baringo        :  864   5-9    : 2304   Min.   :2020   Female:13808  
-#>  Bomet          :  864   10-14  : 2304   1st Qu.:2024   Male  :13808  
-#>  Bungoma        :  864   15-19  : 2304   Median :2028   Total :13808  
-#>  Busia          :  864   20-24  : 2304   Mean   :2028                 
-#>  Elgeyo-Marakwet:  864   25-29  : 2304   3rd Qu.:2031                 
-#>  Embu           :  864   30-34  : 2304   Max.   :2035                 
-#>  (Other)        :36240   (Other):27600                                
+#>  Baringo        :  864   0-4    : 2304   Min.   :2020   Female:13824  
+#>  Bomet          :  864   5-9    : 2304   1st Qu.:2024   Male  :13824  
+#>  Bungoma        :  864   10-14  : 2304   Median :2028   Total :13824  
+#>  Busia          :  864   15-19  : 2304   Mean   :2028                 
+#>  Elgeyo-Marakwet:  864   20-24  : 2304   3rd Qu.:2031                 
+#>  Embu           :  864   25-29  : 2304   Max.   :2035                 
+#>  (Other)        :36288   (Other):27648                                
 #>       pop          
 #>  Min.   :     386  
-#>  1st Qu.:   10984  
-#>  Median :   32576  
-#>  Mean   :  171194  
-#>  3rd Qu.:   73208  
+#>  1st Qu.:   10995  
+#>  Median :   32641  
+#>  Mean   :  171423  
+#>  3rd Qu.:   73371  
 #>  Max.   :62164808  
 #>                    
 
 # Example: Plotting the population distribution for Nairobi County in 2020
-library(ggplot2)
-library(dplyr)
-kenya_2020 <- pop1 %>%
-  filter(county == "Nairobi City", year == 2020, gender == "Total", age != 'All Ages')
-ggplot(kenya_2020, aes(x = age, y = pop)) +
-  geom_bar(stat = "identity") +
-  labs(
-    title = "Population Distribution in Nairobi County (2020)",
-    x = "Age Group",
-    y = "Population"
-  ) +
-  theme_minimal()
+if (requireNamespace("ggplot2", quietly = TRUE) &&
+    requireNamespace("dplyr", quietly = TRUE)) {
+  library(ggplot2)
+  library(dplyr)
+  kenya_2020 <- pop1 %>%
+    filter(county == "Nairobi City", year == 2020, gender == "Total", age != 'All Ages')
+  ggplot(kenya_2020, aes(x = age, y = pop)) +
+    geom_bar(stat = "identity") +
+    labs(
+      title = "Population Distribution in Nairobi County (2020)",
+      x = "Age Group",
+      y = "Population"
+    ) +
+    theme_minimal()
+}
 ```

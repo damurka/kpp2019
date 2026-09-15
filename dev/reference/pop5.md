@@ -34,8 +34,8 @@ A data frame with 15,552 rows and 5 variables:
 
 - pop:
 
-  Estimated population count for the specified county, age group,
-  gender, and year
+  Estimated population for the specified county, age group, gender, and
+  year
 
 ## Source
 
@@ -53,6 +53,10 @@ fertility rates, mortality rates, and migration patterns. The age groups
 are provided in 5-year intervals, and the population estimates are
 available in five-year increments from 2020 to 2045.
 
+`pop` is kept at the full decimal precision published by KNBS (these are
+cohort-component projections, not rounded head counts); round it
+yourself if whole-person figures are needed.
+
 **Note:**
 
 - The "Total" gender category represents the combined population of both
@@ -67,14 +71,14 @@ available in five-year increments from 2020 to 2045.
 data(pop5)
 head(pop5)
 #> # A tibble: 6 × 5
-#>   county age    year gender     pop
-#>   <fct>  <fct> <int> <fct>    <dbl>
-#> 1 Kenya  0-4    2020 Male   3123737
-#> 2 Kenya  0-4    2020 Female 3156282
-#> 3 Kenya  0-4    2020 Total  6280019
-#> 4 Kenya  0-4    2025 Male   3221623
-#> 5 Kenya  0-4    2025 Female 3111637
-#> 6 Kenya  0-4    2025 Total  6333261
+#>   county age    year gender      pop
+#>   <fct>  <fct> <int> <fct>     <dbl>
+#> 1 Kenya  0-4    2020 Male   3123737 
+#> 2 Kenya  0-4    2020 Female 3156282 
+#> 3 Kenya  0-4    2020 Total  6280019 
+#> 4 Kenya  0-4    2025 Male   3221623.
+#> 5 Kenya  0-4    2025 Female 3111637.
+#> 6 Kenya  0-4    2025 Total  6333261.
 summary(pop5)
 #>              county           age             year         gender    
 #>  Baringo        :  324   0-4    :  864   Min.   :2020   Female:5184  
@@ -86,7 +90,7 @@ summary(pop5)
 #>  (Other)        :13608   (Other):10368                               
 #>       pop          
 #>  Min.   :     386  
-#>  1st Qu.:   12778  
+#>  1st Qu.:   12779  
 #>  Median :   36744  
 #>  Mean   :  184471  
 #>  3rd Qu.:   78528  
@@ -94,16 +98,19 @@ summary(pop5)
 #>                    
 
 # Example: Plotting the population distribution for Mombasa County in 2025
-library(ggplot2)
-library(dplyr)
-mombasa_2025 <- pop5 %>%
-  filter(county == "Mombasa", year == 2025, gender == "Total", age != 'All Ages')
-ggplot(mombasa_2025, aes(x = age, y = pop)) +
-  geom_bar(stat = "identity") +
-  labs(
-    title = "Population Distribution in Mombasa County (2025)",
-    x = "Age Group",
-    y = "Population"
-  ) +
-  theme_minimal()
+if (requireNamespace("ggplot2", quietly = TRUE) &&
+    requireNamespace("dplyr", quietly = TRUE)) {
+  library(ggplot2)
+  library(dplyr)
+  mombasa_2025 <- pop5 %>%
+    filter(county == "Mombasa", year == 2025, gender == "Total", age != 'All Ages')
+  ggplot(mombasa_2025, aes(x = age, y = pop)) +
+    geom_bar(stat = "identity") +
+    labs(
+      title = "Population Distribution in Mombasa County (2025)",
+      x = "Age Group",
+      y = "Population"
+    ) +
+    theme_minimal()
+}
 ```

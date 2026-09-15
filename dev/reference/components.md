@@ -91,17 +91,21 @@ increase on population size. The rates, such as the crude birth rate
 (CBR) and crude death rate (CDR), provide insights into demographic
 trends per 1,000 population.
 
+`value` is kept at the full decimal precision published by KNBS (these
+are cohort-component projections, not rounded figures); round it
+yourself if whole-number figures are needed.
+
 **Components Explained**:
 
-- **Births**: Total births during the projection period (in thousands).
+- **Births**: Total births during the projection period.
 
-- **Deaths**: Total deaths during the projection period (in thousands).
+- **Deaths**: Total deaths during the projection period.
 
-- **Natural Increase (Nat. Inc.)**: Difference between births and deaths
-  (in thousands).
+- **Natural Increase (Nat. Inc.)**: Difference between births and
+  deaths.
 
 - **Net Migration (Net Mig.)**: Net migration (immigrants minus
-  emigrants) during the projection period (in thousands).
+  emigrants) during the projection period.
 
 - **Crude Birth Rate (CBR)**: Births per 1,000 people per year.
 
@@ -119,27 +123,41 @@ trends per 1,000 population.
 data(components)
 head(components)
 #> # A tibble: 6 × 4
-#>   county component year      value
-#>   <fct>  <fct>     <fct>     <dbl>
-#> 1 Kenya  Births    2020-25 6404408
-#> 2 Kenya  Births    2026-30 6460085
-#> 3 Kenya  Births    2031-35 6475904
-#> 4 Kenya  Births    2036-40 6461490
-#> 5 Kenya  Births    2041-45 6418919
-#> 6 Kenya  Deaths    2020-25 1890966
+#>   county component year       value
+#>   <fct>  <fct>     <fct>      <dbl>
+#> 1 Kenya  Births    2020-25 6404408.
+#> 2 Kenya  Births    2026-30 6460085.
+#> 3 Kenya  Births    2031-35 6475904.
+#> 4 Kenya  Births    2036-40 6461490.
+#> 5 Kenya  Births    2041-45 6418919.
+#> 6 Kenya  Deaths    2020-25 1890966.
 summary(components)
 #>              county       component        year         value          
-#>  Baringo        :  40   Births :240   2020-25:384   Min.   : -29286.0  
+#>  Baringo        :  40   Births :240   2020-25:384   Min.   : -29286.3  
 #>  Bomet          :  40   CBR    :240   2026-30:384   1st Qu.:      6.4  
 #>  Bungoma        :  40   CDR    :240   2031-35:384   Median :     21.4  
 #>  Busia          :  40   CNIR   :240   2036-40:384   Mean   :  67132.2  
-#>  Elgeyo-Marakwet:  40   CNMR   :240   2041-45:384   3rd Qu.:  50576.5  
-#>  Embu           :  40   Deaths :240                 Max.   :6475904.0  
+#>  Elgeyo-Marakwet:  40   CNMR   :240   2041-45:384   3rd Qu.:  50576.3  
+#>  Embu           :  40   Deaths :240                 Max.   :6475903.7  
 #>  (Other)        :1680   (Other):480                                    
 
 # Example: Plot the number of births over the projection periods for Kenya
-library(ggplot2)
-library(dplyr)
+if (requireNamespace("ggplot2", quietly = TRUE) &&
+    requireNamespace("dplyr", quietly = TRUE)) {
+  library(ggplot2)
+  library(dplyr)
+  births <- components %>%
+    filter(component == "Births", county == 'Kenya')
+  ggplot(births, aes(x = factor(year, ordered = TRUE), y = value, group = county)) +
+    geom_line() +
+    geom_point() +
+    labs(
+      title = "Projected Births in Kenya (2020-2045)",
+      x = "Projection Period",
+      y = "Number of Births"
+    ) +
+    theme_minimal()
+}
 #> 
 #> Attaching package: ‘dplyr’
 #> The following objects are masked from ‘package:stats’:
@@ -148,15 +166,4 @@ library(dplyr)
 #> The following objects are masked from ‘package:base’:
 #> 
 #>     intersect, setdiff, setequal, union
-births <- components %>%
-  filter(component == "Births", county == 'Kenya')
-ggplot(births, aes(x = factor(year, ordered = TRUE), y = value, group = county)) +
-  geom_line() +
-  geom_point() +
-  labs(
-    title = "Projected Births in Kenya (2020-2045)",
-    x = "Projection Period",
-    y = "Number of Births"
-  ) +
-  theme_minimal()
 ```
